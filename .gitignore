@@ -15,3 +15,6 @@
 *.log
 *.tmp
 
+#Project specific settings
+.idea/
+
