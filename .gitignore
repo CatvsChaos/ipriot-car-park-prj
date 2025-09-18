@@ -18,3 +18,5 @@
 #Project specific settings
 .idea/
 
+#Guides
+*.org/ 
