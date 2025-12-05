@@ -21,7 +21,30 @@ class CarPark:
         elif isinstance(component, Display):
             self.displays.append(component)
 
+    def add_car(self, plate):
+        self.plates.append(plate)
+        self.update_displays()
 
+    def remove_car(self, plate):
+        self.plates.remove(plate)
+        self.update_displays()
+
+    @property
+    def available_bays(self):
+        # 2.7.3.1 Detour: Implement available bays.
+        # Use operator == so that when last plate takes last bay,
+        # display shows 0 capacity and driver is notified.
+        if len(self.plates) == max(self.capacity):
+            return 0
+        else:
+            return self.capacity - len(self.plates)
+
+    def update_displays(self):
+
+        data = {"available bays": self.available_bays, "temperature": 25}
+
+        for display in self.displays:
+            display.update(data)
 
 
 
