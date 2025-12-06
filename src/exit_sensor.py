@@ -1,6 +1,5 @@
 import random
 
-
 class ExitSensor:
     def __init__(self):
         self.car_park = None
@@ -11,4 +10,3 @@ class ExitSensor:
 
     def _scan_plate(self):
         return random.choice(self.car_park.plates)
-
