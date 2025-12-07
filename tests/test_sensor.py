@@ -10,9 +10,9 @@ class TestSensor(unittest.TestCase):
 
     def test_sensor_initialized_with_all_attributes(self):
         self.assertEqual(self.sensor.id, 1)
-        self.assertEqual(self.sensor.is_active, False)
-        self.assertEqual(self.sensor.car_park, CarPark( "123 Example Street", 100, [], []))
-
+        self.assertEqual(self.Sensor.is_active, False)
+        # self.assertEqual(self.sensor.car_park, CarPark( "123 Example Street", 100, [], []))
+        self.assertEqual(self.sensor.car_park, car_park)
 
     def test_detect_vehicle(self):
         self.assertEqual(self.sensor.entry_sensor.plate, "FAKE-001")

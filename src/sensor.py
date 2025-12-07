@@ -21,9 +21,19 @@ class Sensor(ABC):
         plate = self._scan_plate()
         self.update_car_park(plate)
 
+
 class EntrySensor(Sensor):
-    pass
+
+    def update_car_park(self, plate):
+        self.car_park.add_car(plate)
+        print(f"Incoming 🚘 vehicle detected. Plate: {plate}")
 
 class ExitSensor(Sensor):
-    pass
+
+    def update_car_park(self, plate):
+        self.car_park.remove_car(plate)
+        print(f"Outgoing 🚗 vehicle detected. Plate: {plate}")
+
+    def _scan_plate(self):
+        return random.choice(self.car_park.plates)
 
