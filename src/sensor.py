@@ -11,9 +11,9 @@ class Sensor(ABC):
     def __str__(self):
         return f"Sensor {self.id}: {self.is_active}"
 
-    # Simulate a car entering the car park by randomly generating a new plate
+    @abstractmethod
     def _scan_plate(self):
-        return 'FAKE-' + format(random.randint(0,999), '03d')
+        pass
 
     def detect_vehicle(self):
         plate = self._scan_plate()
@@ -26,6 +26,10 @@ class Sensor(ABC):
 # =========================================
 
 class EntrySensor(Sensor):
+    # Simulate a car entering the car park by randomly generating a new plate
+    def _scan_plate(self):
+        return 'FAKE-' + format(random.randint(0,999), '03d')
+
     def update_car_park(self, plate):
         self.car_park.add_car(plate)
         print(f"Incoming 🚘 vehicle detected. Plate: {plate}")
