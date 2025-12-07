@@ -9,10 +9,10 @@ class TestDisplay(unittest.TestCase):
 
     def test_display_initialized_with_all_attributes(self):
         self.assertIsInstance(self.display, Display)
-        self.assertEqual(self.display.id, 1)
-        self.assertEqual(self.display.message, "")
-        self.assertEqual(self.display.is_on, False)
+        self.assertEqual(self.display.id, 1) # id for second
+        self.assertEqual(self.display.message, "") # X "Welcome to the car park"
+        self.assertEqual(self.display.is_on, False) # X True
 
     def test_update(self):
         self.display.update({"message": "Goodbye"})
-        self.assertEqual(self.display.message, "")
+        self.assertEqual(self.display.message, "") # X "Goodbye"
