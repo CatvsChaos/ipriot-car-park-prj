@@ -15,7 +15,6 @@ class CarPark:
     def register(self, component):
         if not isinstance(component, (Sensor, Display)):
             raise TypeError("Object must be a Sensor or Display")
-
         if isinstance(component, Sensor):
             self.sensors.append(component)
         elif isinstance(component, Display):
@@ -31,15 +30,10 @@ class CarPark:
 
     @property
     def available_bays(self):
-        if len(self.plates) > self.capacity:
-            return 0
-        else:
-            return self.capacity - len(self.plates)
+        return max(0, self.capacity - len(self.plates))
 
     def update_displays(self):
-
         data = {"available bays": self.available_bays, "temperature": 25}
-
         for display in self.displays:
             display.update(data)
 
