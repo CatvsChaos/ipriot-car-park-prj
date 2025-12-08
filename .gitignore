@@ -1,5 +1,6 @@
-# Project development guidelines
+# MDs and log files
 carpark-guide (1).md
+tests/log.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
