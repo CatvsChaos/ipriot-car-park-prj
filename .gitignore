@@ -1,6 +1,7 @@
 # MDs and log files
 carpark-guide (1).md
 tests/log.txt
+tests/config.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
