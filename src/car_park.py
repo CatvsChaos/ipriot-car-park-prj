@@ -57,10 +57,10 @@ class CarPark:
             json.dump({"location": self.location, "capacity": self.capacity, "log_file": str(self.log_file)}, f)
 
     @classmethod
-    def from_config(cls, config_file=Path("config.json")): # TODO: use self.config_file; use Path; add optional parm to __init__
+    def from_config(cls, config_file=Path("config.json")):
         config_file = config_file if isinstance(config_file, Path) else Path(config_file)
         with config_file.open() as f:
             config = json.load(f)
-        return cls(config["location"], config["capacity"], log_file=config["config_file"])
+        return cls(config["location"], config["capacity"], config['plates'], config['sensors'], config['displays'], log_file=config["log_file"])
 
 
