@@ -6,8 +6,8 @@ import json
 
 
 class CarPark:
-    def __init__(self, location, capacity, plates, sensors, displays, log_file=Path("log.txt"), config_file=Path("config.json")):
-        self.location = location
+    def __init__(self, entrance, capacity, plates, sensors, displays, log_file=Path("log.txt"), config_file=Path("config.json")):
+        self.entrance = entrance
         self.capacity = capacity
         self.plates = plates or []
         self.sensors = sensors or []
@@ -17,8 +17,27 @@ class CarPark:
         self.config_file = config_file if isinstance(config_file, Path) else Path(config_file)
         self.config_file.touch(exist_ok=True)
 
-    def __str__(self):
-        return f"Car park location : {self.location} \n Capacity : {self.capacity}"
+
+    def write_config(self):
+        with self.config_file.open('w') as f:
+            json.dump({"entrance": self.entrance,
+                        "capacity": self.capacity,
+                        "plates": self.plates,
+                        "sensors": self.sensors,
+                        "displays": self.displays,
+                        "log_file": str(self.log_file)}, f)
+
+    @classmethod
+    def from_config(cls, config_file=Path("config.json")):
+        config_file = config_file if isinstance(config_file, Path) else Path(config_file)
+        with config_file.open() as f:
+            config = json.load(f)
+        return cls(config["entrance"],
+                   config["capacity"],
+                   config['plates'],
+                   config['sensors'],
+                   config['displays'],
+                   log_file=config["log_file"])
 
     def register(self, component):
         if not isinstance(component, (Sensor, Display)):
@@ -27,6 +46,12 @@ class CarPark:
             self.sensors.append(component)
         elif isinstance(component, Display):
             self.displays.append(component)
+
+
+
+    def _log_car_activity(self, plate, action):
+        with self.log_file.open("a") as f:
+            f.write(f"{plate} {action} at {datetime.now()}\n")
 
     def add_car(self, plate):
         self.plates.append(plate)
@@ -39,6 +64,7 @@ class CarPark:
         self._log_car_activity(plate, "exited")
 
 
+
     @property
     def available_bays(self):
         return max(0, self.capacity - len(self.plates))
@@ -48,19 +74,8 @@ class CarPark:
         for display in self.displays:
             display.update(data)
 
-    def _log_car_activity(self, plate, action):
-        with self.log_file.open("a") as f:
-            f.write(f"{plate} {action} at {datetime.now()}\n")
+    def __str__(self):
+        return f"Entrance : {self.entrance}\nCapacity : {self.available_bays + 1}"
 
-    def write_config(self):
-        with self.config_file.open('w') as f:
-            json.dump({"location": self.location, "capacity": self.capacity, "log_file": str(self.log_file)}, f)
-
-    @classmethod
-    def from_config(cls, config_file=Path("config.json")):
-        config_file = config_file if isinstance(config_file, Path) else Path(config_file)
-        with config_file.open() as f:
-            config = json.load(f)
-        return cls(config["location"], config["capacity"], config['plates'], config['sensors'], config['displays'], log_file=config["log_file"])
 
 

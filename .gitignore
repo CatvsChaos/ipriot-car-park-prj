@@ -2,6 +2,10 @@
 carpark-guide (1).md
 tests/log.txt
 tests/config.json
+src/config.json
+src/moondalup.txt
+src/moondalup_config.json
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

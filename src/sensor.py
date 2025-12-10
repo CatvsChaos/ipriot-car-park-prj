@@ -23,7 +23,7 @@ class Sensor(ABC):
     def update_car_park(self, plate):
         pass
 
-# =========================================
+
 
 class EntrySensor(Sensor):
     # Simulate a car entering the car park by randomly generating a new plate
@@ -33,6 +33,7 @@ class EntrySensor(Sensor):
     def update_car_park(self, plate):
         self.car_park.add_car(plate)
         print(f"Incoming 🚘 vehicle detected. Plate: {plate}")
+
 
 class ExitSensor(Sensor):
     # Simulate a car leaving the car park by randomly selecting an existing plate
