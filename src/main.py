@@ -19,7 +19,7 @@ class Main:
         self.exit_sensor = ExitSensor(id=2, is_active=True, car_park=self.car_park)
 
         # Create a display object with id 1, message "Welcome to Moondalup", is_on True, and car_park car_park
-        self.display = Display(id=1, message="Welcome to Moondalup Car Park", is_on=True)
+        self.display = Display(id=1, message="Welcome to Moondalup Car Park 🅿️", is_on=True)
 
         # Drive 10 cars into the car park (must be triggered via the sensor - NOT by calling car_park.add_car directly)
         for i in range(10):

@@ -45,4 +45,3 @@ class ExitSensor(Sensor):
         print(f"Outgoing 🚗 vehicle detected. Plate: {plate}")
 
 
-

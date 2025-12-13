@@ -6,8 +6,8 @@ import json
 
 
 class CarPark:
-    def __init__(self, entrance, capacity, plates, sensors, displays, log_file=Path("log.txt"), config_file=Path("config.json")):
-        self.entrance = entrance
+    def __init__(self, location, capacity, plates, sensors, displays, log_file=Path("log.txt"), config_file=Path("config.json")):
+        self.location = location
         self.capacity = capacity
         self.plates = plates or []
         self.sensors = sensors or []
@@ -20,7 +20,7 @@ class CarPark:
 
     def write_config(self):
         with self.config_file.open('w') as f:
-            json.dump({"entrance": self.entrance,
+            json.dump({"location": self.location,
                         "capacity": self.capacity,
                         "plates": self.plates,
                         "sensors": self.sensors,
@@ -32,7 +32,7 @@ class CarPark:
         config_file = config_file if isinstance(config_file, Path) else Path(config_file)
         with config_file.open() as f:
             config = json.load(f)
-        return cls(config["entrance"],
+        return cls(config["location"],
                    config["capacity"],
                    config['plates'],
                    config['sensors'],
@@ -75,7 +75,7 @@ class CarPark:
             display.update(data)
 
     def __str__(self):
-        return f"Entrance : {self.entrance}\nCapacity : {self.available_bays + 1}"
+        return f"Location : {self.location}\nCapacity : {self.available_bays + 1}\n\n"
 
 
 
